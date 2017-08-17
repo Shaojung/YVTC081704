@@ -24,6 +24,13 @@ public class StudentDAOMemoryImpl implements StudentDAO {
 
     @Override
     public Student getOneStudent(int ID) {
+        for (Student s : mylist)
+        {
+            if (s.ID == ID)
+            {
+                return s;
+            }
+        }
         return null;
     }
 }
