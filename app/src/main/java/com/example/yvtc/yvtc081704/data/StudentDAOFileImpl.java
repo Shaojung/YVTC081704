@@ -74,10 +74,7 @@ public class StudentDAOFileImpl implements StudentDAO {
     @Override
     public Student[] getAllStudents() {
         // 回傳 mylist
-        if (mylist.size() > 0)
-            return mylist.toArray(new Student[0]);
-        else
-            return null;
+        return mylist.toArray(new Student[0]);
     }
 
     @Override
