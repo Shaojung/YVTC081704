@@ -80,16 +80,42 @@ public class StudentDAOFileImpl implements StudentDAO {
     @Override
     public Student getOneStudent(int ID) {
         // 回傳一筆資料
+        for (Student s : mylist)
+        {
+            if (s.ID == ID)
+            {
+                return s;
+            }
+        }
         return null;
     }
 
     @Override
     public void update(Student s) {
         // 更新 mylist 然後存檔.
+        for (Student t : mylist)
+        {
+            if (t.ID == s.ID)
+            {
+                t.name = s.name;
+                t.tel = s.tel;
+            }
+        }
+        saveFile();
     }
 
     @Override
     public void delete(Student s) {
         //  刪除 mylist 當中一筆資料，然後存檔.
+        int i;
+        for (i=0;i<mylist.size();i++)
+        {
+            if (mylist.get(i).ID == s.ID)
+            {
+                mylist.remove(i);
+                saveFile();
+                return;
+            }
+        }
     }
 }
