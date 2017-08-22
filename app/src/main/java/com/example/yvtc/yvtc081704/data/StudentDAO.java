@@ -9,4 +9,5 @@ public interface StudentDAO {
     public Student[] getAllStudents();
     public Student getOneStudent(int ID);
     public void update(Student s);
+    public void delete(Student s);
 }

@@ -14,6 +14,7 @@ public class DetailActivity extends AppCompatActivity {
     TextView tv1;
     EditText edName, edTel;
     int ID;
+    Student s;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,7 +25,7 @@ public class DetailActivity extends AppCompatActivity {
         Intent it = getIntent();
         ID = it.getIntExtra("ID", 0);
         StudentDAOMemoryImpl dao = new StudentDAOMemoryImpl();
-        Student s = dao.getOneStudent(ID);
+        s = dao.getOneStudent(ID);
         tv1.setText(String.valueOf(s.ID));
         edName.setText(s.name);
         edTel.setText(s.tel);
@@ -32,7 +33,15 @@ public class DetailActivity extends AppCompatActivity {
     public void clickUpdate(View v)
     {
         StudentDAOMemoryImpl dao = new StudentDAOMemoryImpl();
-        dao.update(new Student(ID, edName.getText().toString(), edTel.getText().toString()));
+        s.name = edName.getText().toString();
+        s.tel = edTel.getText().toString();
+        dao.update(s);
+        finish();
+    }
+    public void clickDelete(View v)
+    {
+        StudentDAOMemoryImpl dao = new StudentDAOMemoryImpl();
+        dao.delete(s);
         finish();
     }
 }

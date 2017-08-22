@@ -45,4 +45,17 @@ public class StudentDAOMemoryImpl implements StudentDAO {
             }
         }
     }
+
+    @Override
+    public void delete(Student s) {
+        int i;
+        for (i=0;i<mylist.size();i++)
+        {
+            if (mylist.get(i).ID == s.ID)
+            {
+                mylist.remove(i);
+                return;
+            }
+        }
+    }
 }
