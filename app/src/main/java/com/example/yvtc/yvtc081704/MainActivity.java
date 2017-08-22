@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     String data[];
     ArrayAdapter adapter;
     Student[] students;
+    public static DAOType dt = DAOType.DAO_Memory;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        StudentDAOFileImpl dao = new StudentDAOFileImpl(MainActivity.this);
+        StudentDAO dao = StudentDAOFactory.newInstance(MainActivity.this, dt);
         students = dao.getAllStudents();
         for (Student s : students)
         {

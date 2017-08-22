@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.example.yvtc.yvtc081704.data.Student;
+import com.example.yvtc.yvtc081704.data.StudentDAO;
+import com.example.yvtc.yvtc081704.data.StudentDAOFactory;
 import com.example.yvtc.yvtc081704.data.StudentDAOFileImpl;
 import com.example.yvtc.yvtc081704.data.StudentDAOMemoryImpl;
 
@@ -21,7 +23,7 @@ public class AddActivity extends AppCompatActivity {
     }
     public void clickAdd(View v)
     {
-        StudentDAOFileImpl dao = new StudentDAOFileImpl(AddActivity.this);
+        StudentDAO dao = StudentDAOFactory.newInstance(AddActivity.this, MainActivity.dt);
         dao.add(new Student(Integer.valueOf(ed1.getText().toString()), ed2.getText().toString(), ed3.getText().toString()));
         finish();
     }

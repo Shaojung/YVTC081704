@@ -8,6 +8,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.yvtc.yvtc081704.data.Student;
+import com.example.yvtc.yvtc081704.data.StudentDAO;
+import com.example.yvtc.yvtc081704.data.StudentDAOFactory;
 import com.example.yvtc.yvtc081704.data.StudentDAOMemoryImpl;
 
 public class DetailActivity extends AppCompatActivity {
@@ -24,7 +26,7 @@ public class DetailActivity extends AppCompatActivity {
         edTel = (EditText) findViewById(R.id.edTel);
         Intent it = getIntent();
         ID = it.getIntExtra("ID", 0);
-        StudentDAOMemoryImpl dao = new StudentDAOMemoryImpl();
+        StudentDAO dao = StudentDAOFactory.newInstance(DetailActivity.this, MainActivity.dt);
         s = dao.getOneStudent(ID);
         tv1.setText(String.valueOf(s.ID));
         edName.setText(s.name);
@@ -32,7 +34,7 @@ public class DetailActivity extends AppCompatActivity {
     }
     public void clickUpdate(View v)
     {
-        StudentDAOMemoryImpl dao = new StudentDAOMemoryImpl();
+        StudentDAO dao = StudentDAOFactory.newInstance(DetailActivity.this, MainActivity.dt);
         s.name = edName.getText().toString();
         s.tel = edTel.getText().toString();
         dao.update(s);
@@ -40,7 +42,7 @@ public class DetailActivity extends AppCompatActivity {
     }
     public void clickDelete(View v)
     {
-        StudentDAOMemoryImpl dao = new StudentDAOMemoryImpl();
+        StudentDAO dao = StudentDAOFactory.newInstance(DetailActivity.this, MainActivity.dt);
         dao.delete(s);
         finish();
     }
