@@ -25,12 +25,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         lv = (ListView) findViewById(R.id.listView);
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        StudentDAOMemoryImpl dao = new StudentDAOMemoryImpl();
+        StudentDAOFileImpl dao = new StudentDAOFileImpl(MainActivity.this);
         students = dao.getAllStudents();
         for (Student s : students)
         {

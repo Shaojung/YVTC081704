@@ -1,5 +1,19 @@
 package com.example.yvtc.yvtc081704.data;
 
+import android.content.Context;
+import android.util.Log;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 /**
@@ -8,20 +22,62 @@ import java.util.ArrayList;
 
 public class StudentDAOFileImpl implements StudentDAO {
     public static ArrayList<Student> mylist = new ArrayList();
-    public StudentDAOFileImpl()
+    File dataFile;
+    public StudentDAOFileImpl(Context context)
     {
         // 讀取檔案，放到 mylist
+        dataFile = new File(context.getFilesDir() + File.separator + "data.json");
+        if (dataFile.exists())
+        {
+            try {
+                FileReader fr = new FileReader(dataFile);
+                BufferedReader br = new BufferedReader(fr);
+                String str = br.readLine();
+                Gson gson = new Gson();
+                Log.d("JSON", str);
+                Type listType = new TypeToken<ArrayList<Student>>() {}.getType();
+                mylist = gson.fromJson(str, listType);
+                br.close();
+                fr.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+    private void saveFile()
+    {
+        try {
+            FileWriter fw = new FileWriter(dataFile);
+            BufferedWriter bw = new BufferedWriter(fw);
+            Gson gson = new Gson();
+            String json = gson.toJson(mylist);
+            bw.write(json);
+            bw.close();
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
     public void add(Student s) {
         // mylist 新增一筆資料，然後存檔
+        mylist.add(s);
+        saveFile();
     }
 
     @Override
     public Student[] getAllStudents() {
         // 回傳 mylist
-        return new Student[0];
+        if (mylist.size() > 0)
+            return mylist.toArray(new Student[0]);
+        else
+            return null;
     }
 
     @Override
