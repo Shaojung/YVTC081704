@@ -8,4 +8,5 @@ public interface StudentDAO {
     public void add(Student s);
     public Student[] getAllStudents();
     public Student getOneStudent(int ID);
+    public void update(Student s);
 }

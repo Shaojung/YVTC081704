@@ -33,4 +33,16 @@ public class StudentDAOMemoryImpl implements StudentDAO {
         }
         return null;
     }
+
+    @Override
+    public void update(Student s) {
+        for (Student t : mylist)
+        {
+            if (t.ID == s.ID)
+            {
+                t.name = s.name;
+                t.tel = s.tel;
+            }
+        }
+    }
 }
