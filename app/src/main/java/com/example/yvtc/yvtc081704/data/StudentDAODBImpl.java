@@ -65,11 +65,18 @@ public class StudentDAODBImpl implements StudentDAO {
 
     @Override
     public void update(Student s) {
-
+        SQLiteDatabase db = helper.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("name", s.name);
+        cv.put("tel", s.tel);
+        db.update("phone", cv, "id=?", new String[] {String.valueOf(s.ID)});
+        db.close();
     }
 
     @Override
     public void delete(Student s) {
-
+        SQLiteDatabase db = helper.getWritableDatabase();
+        db.delete("phone", "id=?", new String[] {String.valueOf(s.ID)});
+        db.close();
     }
 }
