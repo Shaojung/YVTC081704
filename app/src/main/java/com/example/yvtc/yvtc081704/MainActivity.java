@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     String data[];
     ArrayAdapter adapter;
     Student[] students;
-    public static DAOType dt = DAOType.DAO_Memory;
+    public static DAOType dt = DAOType.DAO_DB;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

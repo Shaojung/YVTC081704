@@ -5,5 +5,5 @@ package com.example.yvtc.yvtc081704.data;
  */
 
 public enum DAOType {
-    DAO_Memory, DAO_FILE;
+    DAO_Memory, DAO_FILE, DAO_DB;
 }
